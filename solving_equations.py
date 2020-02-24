@@ -1,13 +1,18 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
+
 """
 python解方程
+created by xingxinagrui on 2020.2.24
 """
 
 from scipy.optimize import fsolve
 from math import sin,cos
+from sympy import *
 
-part=4
+# 1-4 scipy
+# 5-7 sympy
+part=7
 
 if part==1:
     # 求解非线性方程组
@@ -21,7 +26,6 @@ if part==1:
     print(solved)
     solved=fsolve(solve_function,[0])
     print(solved)
-    print("Program done!")
 
 if part==2:
     # 求解三元二次方程组
@@ -35,7 +39,6 @@ if part==2:
 
     solved = fsolve(solve_function, [0, 0, 0])
     print(solved)
-    print("Program done!")
 
 
 if part==3:
@@ -48,7 +51,7 @@ if part==3:
 
     solved = fsolve(solve_function, [0])
     print(solved)
-    print("Program done!")
+
 
 if part == 4:
     # 较难无法求解
@@ -62,4 +65,38 @@ if part == 4:
     solved = fsolve(solve_function, [6, -3])
     print(solved)
 
-    print("Program done!")
+if part == 5:
+    # 二元一次方程
+    x = Symbol('x')
+    y = Symbol('y')
+    solved_value=solve([2*x+y-1, x-2*y], [x, y])
+    print(solved_value)
+
+
+if part == 6:
+    # 多解情况
+    x = Symbol('x')
+    solved_value=solve([x**2-9], [x])
+    print(solved_value)
+
+    # 复数解
+    solved_value = solve([x ** 2 + 9], [x])
+    print(solved_value)
+    solved_value = solve([x ** 4 - 9], [x])
+    print(solved_value)
+
+
+    # 非线性解
+    solved_value = solve([sin(x) - 0.5], [x])
+    print(solved_value)
+    solved_value = solve([sin(x) - 1], [x])
+    print(solved_value)
+
+if part == 7:
+    # 二元二次方程组
+    x = Symbol('x')
+    y=  Symbol('y')
+    solved_value=solve([x**2+2*x*y-6,2*x*y-2*y**2+3], [x,y])
+    print(solved_value)
+
+print("Program done!")
