@@ -12,7 +12,7 @@ from sympy import *
 
 # 1-4 scipy
 # 5-7 sympy
-part=7
+part=8
 
 if part==1:
     # 求解非线性方程组
@@ -98,5 +98,12 @@ if part == 7:
     y=  Symbol('y')
     solved_value=solve([x**2+2*x*y-6,2*x*y-2*y**2+3], [x,y])
     print(solved_value)
+
+if part==8:
+    x=-(-3 + sqrt(13))*sqrt(sqrt(13)/2 + 2)
+    y=-sqrt(sqrt(13)/2 + 2)
+    z=x*x-2*y*y
+    print(z)
+
 
 print("Program done!")
