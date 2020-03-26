@@ -12,7 +12,7 @@ from sympy import *
 
 # 1-4 scipy
 # 5-7 sympy
-part=8
+part=12
 
 if part==1:
     # 求解非线性方程组
@@ -105,5 +105,86 @@ if part==8:
     z=x*x-2*y*y
     print(z)
 
+if part==9:
+    #求解微分方程
+    u = Function('u')
+    t = Symbol('t',real=True)
+    L = Symbol('L',real=True)
+    C = Symbol('C', real=True)
+    R = Symbol('R', real=True)
+    w = Symbol('w', real=True)
+    M = Symbol('M',real=True)
+    eq=L*C*u(t).diff(t,2)+R*C*u(t).diff(t,1)+u(t)-M*cos(w*t)
 
+    #eq2= u(t).diff(t,2)+2*u(t).diff(t,1)-u(t)
+    print(dsolve(Eq(eq,0),u(t)))
+
+if part==10:
+    t = Symbol('t', real=True)
+    L = Symbol('L', real=True)
+    C = Symbol('C', real=True)
+    R = Symbol('R', real=True)
+    w = Symbol('w', real=True)
+    M = Symbol('M', real=True)
+    C1 = Symbol('C1', real=True)
+    C2 = Symbol('C2', real=True)
+    u = Function('u')
+    Solve=Symbol('Slolve')
+    u=-C*L*M*w**2*cos(t*w)/(C**2*R**2*w**2 + (C*L*w**2 - 1)**2) +\
+    C*M*R*w*sin(t*w)/(C**2*R**2*w**2 + (C*L*w**2 - 1)**2) +\
+    C1*exp(t*(-R - sqrt(C*(C*R**2 - 4*L))/C)/(2*L)) +\
+    C2*exp(t*(-R + sqrt(C*(C*R**2 - 4*L))/C)/(2*L)) +\
+    M*cos(t*w)/(C**2*R**2*w**2 + (C*L*w**2 - 1)**2)
+
+    Result=Symbol('Result',real=True)
+    Result=simplify(L*C*u(t).diff(t,2)+R*C*u(t).diff(t,1)+u(t)-M*cos(w*t))
+    print(Result)
+
+if part==11:
+    #较为复杂的方程
+    u = Function('u')
+    t = Symbol('t',real=True)
+    L = Symbol('L',real=True)
+    C = Symbol('C', real=True)
+    R = Symbol('R', real=True)
+    w = Symbol('w', real=True)
+    M = Symbol('M',real=True)
+    eq=L*C*u(t).diff(t,2)+R*C*u(t).diff(t,1)+u(t)-M*cos(w*t)
+
+    eq2= u(t).diff(t,2)+2*u(t).diff(t,1)-u(t)
+    print(dsolve(Eq(eq,0),u(t)))
+
+if part==12:
+    #三角函数
+    x=Symbol('x')
+    print(cos(3*pi/2-x))
+    print(cos(3 * pi / 2 + x))
+
+if part==13:
+    x=Symbol('x')
+    y=atan(x)
+    print("一阶导数:",end=' ')
+    print(diff(y,x,1)) #一阶导数
+    print("二阶导数:",end=' ')
+    print(diff(y,x,2)) #二阶导数
+    print("积分:",end=' ')
+    print(integrate(y,x))  #积分
+    print("定积分:", end=' ')
+    print(integrate(y, (x,0,3*pi/2)))   #定积分
+    print("广义积分:", end=' ')
+    print(integrate(y, (x, 0, +oo)))  # 广义积分
+    print('以下为多元方程：')
+    a = Symbol('a')
+    y2=atan(x+a)
+    print("偏导一阶:", end=' ')
+    print(diff(y2,x,1)) #偏导一阶
+    print("偏导二阶:", end=' ')
+    print(diff(y2,x,2)) #偏导二阶
+    print("积分:",end=' ')
+    print(integrate(y2,x))  #积分
+    print("定积分:", end=' ')
+    y3=exp(-(x+a+1))
+    print(integrate(y3, (x,0,3*pi/2)))   #定积分
+    print("广义积分:", end=' ')
+    print(integrate(y3, (x, 0, +oo)))  # 广义积分
 print("Program done!")
