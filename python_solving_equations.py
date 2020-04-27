@@ -13,7 +13,7 @@ import math
 
 # 1-4 scipy
 # 5-7 sympy
-part = 19
+part = 28
 
 if part == 1:
     # 求解非线性方程组,scipy
@@ -301,10 +301,10 @@ if part == 19:
     U = Function('U')
     eq1 = V(t).diff(t, 1) + U(t).diff(t, 1) - 3
     eq2 = V(t).diff(t, 1) - U(t).diff(t, 1)
-    eq=(Eq(eq1,0),Eq(eq2,0))
+    eq=(Eq(Derivative(V(t),-(Derivative(U(t),t) - 3)),0),Eq(Derivative(U(t),t),Derivative(V(t),t)))
     # print(dsolve([Eq(eq1,0),Eq(eq2,0)],[V(t),U(t)]))
     #print(dsolve(Eq(eq1, 0), U(t)))
-    print(dsolve(eq, U(t)))
+    print(dsolve(eq))
     #print(dsolve([eq1], U(t)))
     # print(dsolve([Eq(eq1, 0), Eq(eq2, 0)], U(t)))
     #print(dsolve(Eq(eq1, 0), U(t)))
@@ -385,5 +385,123 @@ if part == 20:
     print('Solved_value:')
     print(solved_value)
 
+if part==21:
+    # 此类解不开
+    A=Symbol('A')
+    B=Symbol('B')
+    t=Symbol('t')
+    U=Function('U')
+    #eq1=(1+A*U(t))**(3/2)*(U(t).diff(t,2)+U(t))-B
+    eq1 = ((1+A*U(t))**(3/2))*(U(t).diff(t, 2) + U(t)) - B
+    print(dsolve(eq1,U(t)))
+
+if part==22:
+    # 涉及m和n，为具体的数字的时候可以解开，其他情况解不开
+    x=Symbol('x')
+    y=Symbol('y')
+    m=Symbol('m',real=True)
+    n=Symbol('n',real=True)
+    eq1=sqrt((x+4)**2+y**2)-sqrt((x-4)**2+y**2)-m
+    eq2=sqrt((x+4)**2+y**2)-sqrt(x**2+(y-4*sqrt(3))**2)-n
+    print(solve([eq1,eq2],[x,y]))
+
+if part==23:
+    x=Symbol('x')
+    t=Symbol('t')
+    Y=Function('Y')
+    eq1=I*Y(x,t).diff(x,1)+Y(x,t).diff(t,2)+I*(Y(x,t)**2)*Y(x,t).diff(t,2)
+    print(dsolve(eq1,Y(x)))
+
+if part==24:
+    s=Function('s')
+    e=Function('e')
+    t=Symbol('t')
+    eq1=s(t).diff(t,2)+4*s(t).diff(t,1)+16*s(t)-e(t).diff(t,1)-4*e(t)
+    print(dsolve(eq1,s(t)))
+
+if part==25:
+    x=Symbol('x')
+    y=Symbol('y')
+    eq1=x*(200-y)-1.14*y*(203-x)
+    eq2=ln(1.14)+ 1.96*(1/x+1/y+1/(203-x)+1/(200-y))**0.5-ln(1.68)
+    solved_value=solve([eq1,eq2], [x,y])
+    print(solved_value)
+
+if part==26:
+    x=104.900117627822 - 12.6145953465354*I
+    y=96.6995289862401 - 12.4285752763767*I
+    eq1 = x * (200 - y) - 1.14 * y * (203 - x)
+    eq2=ln(1.14)+ 1.96*(1/x+1/y+1/(203-x)+1/(200-y))**0.5-ln(1.68)
+    print(simplify(eq1))
+    print(simplify(eq2))
+
+if part==27:
+    x=Function('x')
+    y=Function('y')
+    t=Symbol('t')
+    wx=Symbol('wx')
+    wd=Symbol('wd')
+    wy=Symbol('wy')
+    wz=Symbol('wz')
+    ky=Symbol('ky')
+    kyx=Symbol('kyx')
+    cons1=Symbol('cons1')
+    Qx=Symbol('Qx')
+    Qy=Symbol('Qy')
+    Fd=Symbol('Fd')
+    mx=Symbol('mx')
+    my=Symbol('my')
+    mc=Symbol('mc')
+
+    #x=cons1 - Integral(Qy*wy**2*y(t) + Qy*Derivative(y(t), (t, 2)) + wy*Derivative(y(t), t), t)/(2*Qy*wz)
+
+    eq1=x(t).diff(t,2)+wx/Qx*x(t).diff(t,1)+wx*wx*x(t)-Fd/mx*sin(wd*t)+kyx/mx*y(t)
+    eq2=y(t).diff(t,2)+wy/Qy*y(t).diff(t,1)+wy*wy*y(t)+2*mc*wz*x(t).diff(t,1)/my
+
+    eq=(Eq(eq1,0),Eq(eq2,0))
+    solve=dsolve(eq1,y(t))
+    print(solve)
+
+if part==28:
+    E=Function('E')
+    t=Symbol('t')
+    tao=Symbol('tao')
+    alpha=Symbol('alpha')
+    tR=Symbol('tR')
+    L=Symbol('L')
+    delta=Symbol('delta')
+    beta1=Symbol('beta1')
+    beta2=Symbol('beta2')
+    beta3=Symbol('beta3')
+    beta4=Symbol('beta4')
+    gama=Symbol('gama')
+    Ein=Symbol('Ein')
+    xita=Symbol('xita')
+    w=Symbol('w')
+
+    eq1=(-alpha-I*delta+I*L*( beta2/2*((I*I*w)**2)+ beta3/6*(I*I*w)**2 + beta4/12*(I*I*w)**2 ))*E(t)-tR*E(t).diff(t,1)
+    eq1_1=(-alpha-I*delta+I*L*( beta2/2*((I*I*w)**2)+ beta3/6*(I*I*w)**2 + beta4/12*(I*I*w)**2 ))*E(t)-tR*E(t).diff(t,1)+sqrt(xita)*Ein
+
+
+    eq2=tR*(E(t).diff(t,1))-I*gama*E(t)*((abs(E(t)))**2)
+
+    #print(dsolve(eq1_1,E(t)))
+    print(dsolve(eq2,E(t)))
+
+    #tR * Integral(1 / (_y * Abs(_y) ** 2), (_y, E(t))), C1 + I * gama * t
+
+    '''
+    eq1
+    Eq(E(t), exp((C1 + I*L*beta2*t*w**2/2 + I*L*beta3*t*w**2/6 + I*L*beta4*t*w**2/12 - alpha*t - I*delta*t)/tR))
+    '''
+
+    '''
+    eq2
+    E(t)形式：
+    Eq(tR*Integral(1/(_y*Abs(_y)**2), (_y, E(t))), C1 + I*gama*t)
+    eq2:
+    E(t,tao)形式
+    
+    '''
 
 print("Program done!")
